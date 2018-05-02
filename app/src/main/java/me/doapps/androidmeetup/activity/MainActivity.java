@@ -1,5 +1,6 @@
-package me.doapps.androidmeetup;
+package me.doapps.androidmeetup.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import me.doapps.androidmeetup.R;
+import me.doapps.androidmeetup.service.CounterIntentService;
+import me.doapps.androidmeetup.service.CounterService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,5 +53,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+//        startService(new Intent(this, CounterService.class));
+        startService(new Intent(this, CounterIntentService.class));
+        super.onResume();
     }
 }
