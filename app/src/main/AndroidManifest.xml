@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.doapps.androidmeetup">
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,14 +27,28 @@
         <service
             android:name=".service.CounterService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true"></service>
 
         <service
             android:name=".service.CounterIntentService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true"></service>
+
+        <receiver
+            android:name=".broadcast.SampleReceiver"
+            android:enabled="true">
+            <intent-filter android:priority="2147483647">
+                <!--<action android:name="me.doapps.Sample"></action>-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <!--<action android:name="android.intent.action.AIRPLANE_MODE" />-->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+                <!--<action android:name="Telephony.Sms.Intents.SMS_RECEIVED_ACTION"></action>-->
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.JobSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
     </application>
 
